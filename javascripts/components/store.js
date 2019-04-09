@@ -5,16 +5,20 @@ import bookImport from  '../helpers/book.js';
 
 const makeStore = () => {
     const getBook = bookImport.getBook();
-    const bookTitle = getBook.title;
-    const bookPrice = getBook.price;
-    const bookImg = getBook.image;
     let domString = `   
-                        <h6>Book:${bookTitle}</h6>
-                        <img src="${bookImg}">
-                        <p>${bookPrice}</p>
-                        <button class="btn btn-danger">Add To Cart</button>   
+                        <h6>Book Title:${getBook.title}</h6>
+                        <img src="${getBook.image}">
+                        <p>${getBook.price}</p>
+                        <button class="btn btn-danger" id="cartBtn">Add To Cart</button>   
                     `;
     util.printToDom('storeCon', domString);
+    document.getElementById('cartBtn').addEventListener('click', addToCartEvent);
 };
+
+const addToCartEvent = (e) => {
+    e.preventDefault();
+    const getBook = bookImport.getBook();
+    console.log(getBook);   
+}
 
 export default { makeStore };
